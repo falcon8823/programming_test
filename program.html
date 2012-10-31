@@ -293,50 +293,122 @@ pre {
 	}
 }
 </style>
-<title>プログラミングテスト</title>
+<title>プログラミングテスト模範プログラム</title>
 
 </head>
 <body>
-<h1>プログラミングテスト</h1>
+<h1>プログラミングテスト模範プログラム</h1>
 
-<h2>1. 次の図形を描きなさい</h2>
+<h1>1.</h1>
 
-<p>次の条件に従って図のような図形を描きなさい．</p>
+<pre>
+size(400, 400);
+translate(200, 200);
 
-<ul>
-<li>画面サイズ: 400x400 px</li>
-<li>○の大きさ: 直径30px</li>
-<li>中心からの距離: r = 150</li>
-<li>○の角度の間隔: PI / 6</li>
-<li>三角関数(sin, cos)を用いること</li>
-<li>translateメソッドを用いても良い
-
-<ul>
-<li>translate(200, 200)とすると原点が(200, 200)の位置にずれる</li>
-</ul>
-</li>
-</ul>
+float r = 150;
+for(float theta = 0.0; theta <= 2 * PI; theta += PI / 6) {
+  float x = r * cos(theta);
+  float y = r * sin(theta);
+  
+  ellipse(x, y, 30, 30);
+}
+</pre>
 
 
-<p><img src="img/1.png" alt="" /></p>
+<h1>2.</h1>
 
-<h2>2. 次のアニメーションを作成しなさい</h2>
+<p>sin, cosの引数の値を変化させて回転させる方法</p>
 
-<p>1で描いた図形を200, 200を中心に回転するアニメーションを作成しなさい，</p>
+<pre>
+float r;
+float t;
 
-<h2>3. 次の図形を描きなさい</h2>
+void setup() {
+  size(400, 400);
+  smooth();
+  
+  r = 150;
+  t = 0;
+}
 
-<ul>
-<li>縦10個，横10個の四角形を描きなさい</li>
-</ul>
+void draw() {
+  background(0);
+  translate(200, 200);
+  
+  for(float theta = 0; theta <= 2 * PI; theta += PI / 6) {
+    float x = r * cos(theta + t);
+    float y = r * sin(theta + t);
+    
+    ellipse(x, y, 30, 30);
+  }
+  
+  t += 10;
+}
+
+</pre>
 
 
-<p><img src="img/3.png" alt="" /></p>
+<p>rotateを使って回転させる方法</p>
 
-<h2>4. 次の図形を描きなさい</h2>
+<pre>
+float r;
+float t;
 
-<p>3の図形に下の画像の様な規則で色をつけなさい．</p>
+void setup() {
+  size(400, 400);
+  smooth();
+  
+  r = 150;
+  t = 0;
+}
 
-<p><img src="img/4.png" alt="" /></p>
+void draw() {
+  background(0);
+  translate(200, 200);
+  
+  rotate(t);
+  
+  for(float theta = 0; theta <= 2 * PI; theta += PI / 6) {
+    float x = r * cos(theta);
+    float y = r * sin(theta);
+    
+    ellipse(x, y, 30, 30);
+  }
+  
+  t += 10;
+}
+
+</pre>
+
+
+<h1>3.</h1>
+
+<pre>
+size(400, 400);
+smooth();
+
+for(int y = 0; y < 10; y++) {
+  for(int x = 0; x < 10; x++) {
+    rect(40 * x + 2.5, 40 * y + 2.5, 35, 35);
+  }
+}
+</pre>
+
+
+<h1>4.</h1>
+
+<pre>
+size(400, 400);
+smooth();
+
+for(int y = 0; y < 10; y++) {
+  for(int x = 0; x < 10; x++) {
+    fill((x + y) % 2 == 0 ? 0 : 255);
+    
+    rect(40 * x + 2.5, 40 * y + 2.5, 35, 35);
+  }
+}
+</pre>
+
 </body>
 </html>
